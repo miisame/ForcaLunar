@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog_lunar"
+    android:padding="0dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⏰"
+        android:textSize="56sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_tempo_titulo"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/moon_gold_dim"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/txtMensagemTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_tempo_mensagem"
+        android:textSize="14sp"
+        android:textColor="@color/moon_gold_dim"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/txtPalavraTempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/moon_text_light"
+        android:letterSpacing="0.1"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_word_dialog"
+        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <Button
+            android:id="@+id/btnSairTempo"
+            style="@style/DialogButtonSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/botao_sair"
+            android:minWidth="100dp" />
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/btnNovaPartidaTempo"
+            style="@style/DialogButtonPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/botao_nova_partida"
+            android:minWidth="120dp" />
+    </LinearLayout>
+</LinearLayout>

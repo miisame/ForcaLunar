@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores principais - Tema Cavaleiro da Lua -->
+    <color name="moon_dark_bg">#0F1117</color>
+    <color name="moon_card_bg">#1A1E2A</color>
+
+    <!-- Cores de destaque - Branco e Prata -->
+    <color name="moon_gold">#FFFFFF</color>
+    <color name="moon_gold_dim">#C0C8D8</color>
+
+    <!-- Cores de apoio -->
+    <color name="moon_input_bg">#2A2F3E</color>
+    <color name="moon_text_light">#FFFFFF</color>
+
+    <!-- Cores adicionais para o tema -->
+    <color name="moon_silver_bright">#E8EDF5</color>
+    <color name="moon_silver_dim">#8A94A8</color>
+    <color name="moon_white_translucent">#33FFFFFF</color>
+</resources>

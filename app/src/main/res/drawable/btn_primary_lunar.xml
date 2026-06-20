@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    btn_primary_lunar.xml - Botão Primário do App
+    Este drawable define o estilo do botão principal do aplicativo,
+    usado na tela inicial para iniciar o jogo.
+-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- GRADIENTE -->
+    <gradient
+        android:startColor="#FFFFFF"
+        android:endColor="#E0E5F0"
+        android:angle="135" />
+
+    <!-- CANTOS ARREDONDADOS -->
+    <corners android:radius="60dp" />
+
+    <!-- ESPAÇAMENTO INTERNO (PADDING) -->
+    <padding
+        android:left="20dp"
+        android:right="20dp"
+        android:top="14dp"
+        android:bottom="14dp" />
+
+</shape>

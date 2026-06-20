@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    edittext_lunar.xml - Campo de Texto (EditText)
+    Este drawable define o estilo dos campos de entrada de texto
+    do aplicativo, usado para digitar o nick e cadastrar palavras.
+-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- COR DE FUNDO -->
+    <solid android:color="#2A2F3E" />
+
+    <!-- CANTOS ARREDONDADOS -->
+    <corners android:radius="60dp" />
+
+    <!-- BORDA -->
+    <stroke
+        android:width="1.5dp"
+        android:color="#50FFFFFF" /> <!-- Branco com 31% opacidade -->
+
+    <!-- ESPAÇAMENTO INTERNO (PADDING) -->
+    <padding
+        android:left="24dp"
+        android:right="24dp"
+        android:top="16dp"
+        android:bottom="16dp" />
+
+</shape>

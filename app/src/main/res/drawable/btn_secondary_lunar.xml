@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    btn_secondary_lunar.xml - Botão Secundário do App
+    Este drawable define o estilo do botão secundário do aplicativo,
+    usado na tela inicial para cadastrar novas palavras.
+-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- BORDA -->
+    <stroke
+        android:width="1.5dp"
+        android:color="#80FFFFFF" /> <!-- Branco com 50% opacidade -->
+
+    <!-- COR DE FUNDO -->
+    <solid android:color="#00000000" /> <!-- Transparente -->
+
+    <!-- CANTOS ARREDONDADOS -->
+    <corners android:radius="60dp" />
+
+    <!-- ESPAÇAMENTO INTERNO (PADDING) -->
+    <padding
+        android:left="20dp"
+        android:right="20dp"
+        android:top="14dp"
+        android:bottom="14dp" />
+
+</shape>

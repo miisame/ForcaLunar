@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    border_bottom_lunar.xml - Linha Separadora Inferior
+    Este drawable cria uma linha divisória sutil na parte inferior
+    de um elemento, usada para separar visualmente seções.
+
+    TÉCNICA: Layer-list com deslocamento negativo
+    O item é deslocado -2dp para baixo, esquerda e direita,
+    fazendo com que apenas a parte superior do stroke apareça.
+    Isso cria o efeito de uma "linha divisória" na parte inferior.
+-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Item com deslocamento negativo -->
+    <item
+        android:bottom="-2dp"
+        android:left="-2dp"
+        android:right="-2dp">
+
+        <shape android:shape="rectangle">
+
+            <!-- Fundo transparente (não visível) -->
+            <solid android:color="@android:color/transparent" />
+
+            <!-- BORDA -->
+            <stroke
+                android:width="1dp"
+                android:color="#33FFFFFF" /> <!-- Branco com 20% de opacidade -->
+
+        </shape>
+
+    </item>
+
+</layer-list>

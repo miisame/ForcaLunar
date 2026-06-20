@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_game.xml - Tela Principal do Jogo
+    Esta tela contém todos os elementos do jogo da forca:
+    - Informações do jogador e tempo
+    - Imagem da forca
+    - Palavra oculta
+    - Teclado virtual (gerado dinamicamente)
+    - Container para fragmentos extras -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/gameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient_lunar"
+    android:gravity="center">
+
+    <!-- CARD PRINCIPAL DO JOGO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_lunar"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
+
+        <!-- LINHA: JOGADOR E TEMPO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/border_bottom_lunar">
+
+            <!-- Nome do jogador -->
+            <TextView
+                android:id="@+id/txtNick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/jogador_label"
+                android:textSize="14sp"
+                android:textColor="@color/moon_gold_dim" />
+
+            <!-- Tempo restante -->
+            <TextView
+                android:id="@+id/txtTempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tempo_label"
+                android:textSize="14sp"
+                android:textColor="@color/moon_gold_dim" />
+        </LinearLayout>
+
+        <!-- TÍTULO DO JOGO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tela_jogo"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/moon_text_light"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- IMAGEM DA FORCA
+             contentDescription: Descrição acessível para leitores de tela -->
+        <ImageView
+            android:id="@+id/imgForca"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            app:srcCompat="@drawable/forca_0"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@string/content_desc_forca" />
+
+        <!-- PALAVRA OCULTA -->
+        <TextView
+            android:id="@+id/txtPalavraOculta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/palavra_oculta_placeholder"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:textColor="@color/moon_text_light"
+            android:letterSpacing="0.15"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center" />
+
+        <!-- TECLADO VIRTUAL
+             Container para o teclado de letras (A-Z).
+             Os botões são gerados dinamicamente pelo Java
+             no método criarTecladoVirtual() da GameActivity.
+             Organização: 5 colunas, botões com weight igual.
+        -->
+        <LinearLayout
+            android:id="@+id/tecladoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
+    <!-- CONTAINER PARA FRAGMENTO
+
+         Área reservada para o fragmento que exibe informações extras.
+         Atualmente, exibe o ForcaFragment (imagem da forca em destaque).
+         Pode ser usado futuramente para notificações ou sensores.
+    -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

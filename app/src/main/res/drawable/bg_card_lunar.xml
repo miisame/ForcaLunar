@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    bg_card_lunar.xml - Fundo do Card Principal
+    Este drawable define o estilo dos cards/containers do app.
+    Usado no card principal da tela inicial e do jogo.
+-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- COR DE FUNDO-->
+    <solid android:color="#1A1E2A" /> <!-- Azul escuro acinzentado -->
+
+    <!-- CANTOS ARREDONDADOS -->
+    <corners android:radius="48dp" />
+
+    <!-- BORDA -->
+    <stroke android:width="1.5dp" android:color="#33FFFFFF" /> <!-- Borda fina / Branco com 20% de opacidade -->
+
+</shape>

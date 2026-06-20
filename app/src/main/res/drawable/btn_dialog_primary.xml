@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    btn_dialog_primary.xml - Botão Primário dos Diálogos
+    Este drawable define o estilo do botão principal (NOVA PARTIDA)
+    nos diálogos de vitória, derrota e tempo esgotado.
+-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        ESTADO: BOTÃO PRESSIONADO
+        Quando o usuário pressiona o botão, as cores escurecem
+        para dar feedback tátil de que o botão foi clicado.
+    -->
+    <item android:state_pressed="true">
+
+        <shape android:shape="rectangle">
+
+            <!-- Gradiente mais escuro (pressionado) -->
+            <gradient
+                android:startColor="#B0B8C9"
+                android:endColor="#A0A8B9"
+                android:angle="135" />
+
+            <!-- Cantos arredondados -->
+            <corners android:radius="40dp" />
+
+        </shape>
+
+    </item>
+
+    <!--
+        ESTADO: BOTÃO NORMAL (NÃO PRESSIONADO)
+        Estado padrão do botão quando não está sendo interagido.
+    -->
+    <item>
+
+        <shape android:shape="rectangle">
+
+            <!-- Gradiente prateado claro (normal) -->
+            <gradient
+                android:startColor="#E8EDF5"
+                android:endColor="#C0C8D8"
+                android:angle="135" />
+
+            <!-- Cantos arredondados -->
+            <corners android:radius="40dp" />
+
+        </shape>
+
+    </item>
+
+</selector>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    btn_keyboard_lunar.xml - Botão do Teclado Virtual
+    Este drawable define o estilo dos botões do teclado virtual
+    no jogo (letras A-Z).
+-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        ESTADO: BOTÃO HABILITADO
+        Quando a letra ainda NÃO foi usada.
+    -->
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+
+            <!-- Gradiente prateado transparente (efeito vidro) -->
+            <gradient
+                android:startColor="#25FFFFFF"
+                android:endColor="#08FFFFFF"
+                android:angle="135" />
+
+            <!-- Cantos arredondados -->
+            <corners android:radius="16dp" />
+
+            <!-- Borda prateada -->
+            <stroke
+                android:width="1.5dp"
+                android:color="#50FFFFFF" /> <!-- Branco com 31% opacidade -->
+
+        </shape>
+    </item>
+
+    <!--
+        ESTADO: BOTÃO DESABILITADO
+        Quando a letra JÁ FOI usada pelo jogador.
+    -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+
+            <!-- Fundo escuro (letra já usada) -->
+            <solid android:color="#2A2F42" /> <!-- Azul escuro -->
+
+            <!-- Cantos arredondados -->
+            <corners android:radius="16dp" />
+
+            <!-- Borda sutil (menos visível) -->
+            <stroke
+                android:width="1dp"
+                android:color="#30FFFFFF" /> <!-- Branco com 19% opacidade -->
+
+        </shape>
+    </item>
+</selector>

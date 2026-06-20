@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    bg_gradient_lunar.xml - Fundo Gradiente da Tela
+    Este drawable define o fundo gradiente de todas as telas do app.
+    Ângulo: 135° (diagonal, da esquerda superior para direita inferior)
+-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Gradiente diagonal (135°) escurecendo do canto superior esquerdo -->
+    <gradient
+        android:startColor="#0F1117"
+        android:endColor="#1A1E2A"
+        android:angle="135" />
+
+</shape>

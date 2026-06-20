@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient_lunar"
+    android:gravity="center">
+
+    <!-- Card principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card_lunar"
+        android:padding="32dp"
+        android:layout_margin="16dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌙"
+            android:textSize="48dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FORCA LUNAR"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/moon_text_light"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp" />
+
+        <!-- Campo de Nick -->
+        <EditText
+            android:id="@+id/editNick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu nick"
+            android:textColor="@color/moon_text_light"
+            android:textColorHint="@color/moon_gold_dim"
+            android:background="@drawable/edittext_lunar"
+            android:padding="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Botão Iniciar -->
+        <Button
+            android:id="@+id/btnIniciar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar"
+            android:background="@drawable/btn_primary_lunar"
+            android:textColor="@color/moon_dark_bg"
+            android:textSize="16sp"
+            android:padding="14dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botão Cadastrar -->
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tela_cadastrar"
+            android:background="@drawable/btn_secondary_lunar"
+            android:textColor="@color/moon_text_light"
+            android:textSize="16sp"
+            android:padding="14dp" />
+
+    </LinearLayout>
+</LinearLayout>

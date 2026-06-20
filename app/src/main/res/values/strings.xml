@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">ForcaLunar</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Telas -->
+    <string name="titulo_app">Forca Lunar</string>
+    <string name="tela_jogo">Forca Lunar</string>
+    <string name="jogador_label">Jogador: </string>
+    <string name="tempo_label">Tempo: </string>
+    <string name="palavra_oculta_placeholder">_____</string>
+
+    <!-- Tela inicial -->
+    <string name="hint_nick">Digite seu nick</string>
+    <string name="botao_iniciar">Iniciar</string>
+    <string name="tela_cadastrar">Cadastrar Palavras</string>
+
+
+    <!-- Cadastro de palavras -->
+    <string name="hint_palavra">Digite a palavra</string>
+    <string name="hint_tema">Digite o tema / categoria</string>
+    <string name="botao_salvar">Salvar</string>
+    <string name="toast_cadastro_ok">Palavra cadastrada: </string>
+    <string name="toast_preencha_campos">Preencha palavra e tema</string>
+
+    <!-- Diálogos -->
+    <string name="dialog_vitoria_titulo">Parabéns!</string>
+    <string name="dialog_vitoria_mensagem">Você acertou a palavra: </string>
+    <string name="dialog_derrota_titulo">Você perdeu!</string>
+    <string name="dialog_derrota_mensagem">Você cometeu 6 erros.\nA palavra era: </string>
+    <string name="dialog_tempo_titulo">Tempo esgotado!</string>
+    <string name="dialog_tempo_mensagem">Você não conseguiu adivinhar a tempo.\nA palavra era: </string>
+    <string name="botao_nova_partida">Nova partida</string>
+    <string name="botao_nova_palavra">Nova palavra</string>
+    <string name="botao_sair">Sair</string>
+
+    <!-- Acessibilidade -->
+    <string name="content_desc_forca">Imagem da forca mostrando %1$d erros</string>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    btn_dialog_secondary.xml - Botão Secundário dos Diálogos
+    Este drawable define o estilo do botão secundário (SAIR)
+    nos diálogos de vitória, derrota e tempo esgotado.
+-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        ESTADO: BOTÃO PRESSIONADO
+        Dá feedback visual de que o botão foi clicado.
+    -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+
+            <!-- Fundo semi-transparente (pressionado) -->
+            <solid android:color="#30FFFFFF" /> <!-- Branco com 19% opacidade -->
+
+            <!-- Cantos arredondados -->
+            <corners android:radius="40dp" />
+
+            <!-- Borda mais visível (pressionado) -->
+            <stroke
+                android:width="1.5dp"
+                android:color="#70FFFFFF" /> <!-- Branco com 44% opacidade -->
+
+        </shape>
+    </item>
+
+    <!--
+        ESTADO: BOTÃO NORMAL (NÃO PRESSIONADO)
+        Estado padrão do botão quando não está sendo interagido.
+    -->
+    <item>
+        <shape android:shape="rectangle">
+
+            <!-- Fundo totalmente transparente (normal) -->
+            <solid android:color="#00FFFFFF" /> <!-- Branco com 0% opacidade (invisível) -->
+
+            <!-- Cantos arredondados -->
+            <corners android:radius="40dp" />
+
+            <!-- Borda sutil (normal) -->
+            <stroke
+                android:width="1.5dp"
+                android:color="#40FFFFFF" /> <!-- Branco com 25% opacidade -->
+
+        </shape>
+    </item>
+</selector>
