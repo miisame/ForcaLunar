@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Random;
+import android.widget.ImageButton;
 
 /**
  * Activity principal do jogo da forca.
@@ -37,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
     private ImageView imgForca;                 // Imagem da forca
     private TextView txtTempo;                  // Exibe o tempo restante
     private ArrayList<Button> botoesTeclado = new ArrayList<>(); // Lista de botões do teclado
+    private ImageButton btnVoltarGame;          // Botão para voltar à tela inicial
 
     // ===================== CONTROLE DE TEMPO =====================
     private int tempoSegundos = 180;            // 3 minutos (180 segundos)
@@ -66,9 +69,17 @@ public class GameActivity extends AppCompatActivity {
         txtTempo = findViewById(R.id.txtTempo);
         txtPalavraOculta = findViewById(R.id.txtPalavraOculta);
         imgForca = findViewById(R.id.imgForca);
+        btnVoltarGame = findViewById(R.id.btnVoltarGame);
 
         // Define descrição acessível para a imagem da forca
         imgForca.setContentDescription(getString(R.string.content_desc_forca, 0));
+
+        // ===== 3. CONFIGURA O BOTÃO VOLTAR =====
+        // Define o comportamento quando o botão "Voltar" for clicado
+        btnVoltarGame.setOnClickListener(v -> {
+            pararTimer();  // Para o timer antes de sair
+            finish();      // Fecha a Activity e volta para a tela anterior
+        });
 
         // ===== 3. INICIALIZA O JOGO =====
         iniciarJogo();
@@ -91,20 +102,21 @@ public class GameActivity extends AppCompatActivity {
      */
     private void criarTecladoVirtual() {
         LinearLayout tecladoContainer = findViewById(R.id.tecladoContainer);
-        tecladoContainer.removeAllViews();  // Limpa o teclado anterior
+        tecladoContainer.removeAllViews(); // Limpa o teclado anterior
         botoesTeclado.clear();              // Limpa a lista de botões
 
-        // Array com todas as letras do alfabeto
         String[] letras = {"A","B","C","D","E","F","G","H","I","J","K","L","M",
                 "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
-        int colunas = 5;  // Número de colunas do teclado
+        int colunas = 5;
         int linhaAtual = 0;
+        int margem = 2; // Espaçamento entre os botões
 
-        // Percorre todas as letras
+        // Percorre todas as letras do alfabeto
         for (int i = 0; i < letras.length; i++) {
             // A cada 5 letras, cria uma nova linha
             if (i % colunas == 0) {
+                // Cria um novo LinearLayout para a linha
                 LinearLayout linha = new LinearLayout(this);
                 linha.setLayoutParams(new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -117,25 +129,25 @@ public class GameActivity extends AppCompatActivity {
             // Pega a linha atual para adicionar o botão
             LinearLayout linhaAtualView = (LinearLayout) tecladoContainer.getChildAt(linhaAtual);
 
-            // Infla o layout do botão a partir do XML
             Button btn = (Button) getLayoutInflater().inflate(R.layout.item_teclado, null);
-            btn.setText(letras[i]);
+            btn.setText(letras[i]); // Define a letra do botão
+            btn.setTextSize(14);    // Tamanho da fonte
 
             // Configura o botão para ocupar espaço igual na linha (weight = 1)
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,    // Largura 0 (usa weight)
-                    LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);                // Peso igual para todos
-            params.setMargins(4, 4, 4, 4);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+            params.setMargins(margem, margem, margem, margem);
             btn.setLayoutParams(params);
 
-            // Define o que acontece quando o botão é clicado
             btn.setOnClickListener(v -> {
                 String letraSelecionada = btn.getText().toString();
                 verificarLetra(letraSelecionada.charAt(0));
-                btn.setEnabled(false);  // Desabilita após o clique
+                btn.setEnabled(false);  // Desabilita após o clique (letra já usada)
             });
 
+            // Adiciona o botão à linha atual e à lista de botões
             linhaAtualView.addView(btn);
-            botoesTeclado.add(btn);  // Adiciona à lista de botões
+            botoesTeclado.add(btn);
         }
     }
 
