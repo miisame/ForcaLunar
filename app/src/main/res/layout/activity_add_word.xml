@@ -10,87 +10,111 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/bg_gradient_lunar"
-    android:gravity="center">
+    android:background="@drawable/bg_gradient_lunar">
 
-    <!-- CARD PRINCIPAL -->
+    <!-- BOTÃO VOLTAR -->
+    <ImageButton
+        android:id="@+id/btnVoltar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_voltar"
+        android:background="@drawable/btn_voltar_lunar"
+        android:scaleType="centerInside"
+        android:padding="12dp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Voltar" />
+
+    <!-- CONTEÚDO CENTRALIZADO
+         Este LinearLayout centraliza o card principal na tela,
+         enquanto o botão Voltar fica fixo no topo -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/bg_card_lunar"
-        android:padding="24dp"
-        android:layout_margin="16dp">
+        android:gravity="center"
+        android:padding="0dp">
 
-        <!-- ÍCONE DE DECORAÇÃO -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📜"
-            android:textSize="48dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp" />
-
-        <!-- TÍTULO DA TELA -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tela_cadastrar"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/moon_text_light"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp" />
-
-        <!-- CAMPO: PALAVRA -->
-        <EditText
-            android:id="@+id/editPalavra"
+        <!-- CARD PRINCIPAL -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_palavra"
-            android:background="@drawable/edittext_lunar"
-            android:textColor="@color/moon_text_light"
-            android:textColorHint="@color/moon_gold_dim"
-            android:inputType="textCapCharacters"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_lunar"
+            android:padding="24dp"
+            android:layout_margin="16dp">
 
-        <!-- CAMPO: TEMA -->
-        <EditText
-            android:id="@+id/editTema"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_tema"
-            android:background="@drawable/edittext_lunar"
-            android:textColor="@color/moon_text_light"
-            android:textColorHint="@color/moon_gold_dim"
-            android:inputType="textCapWords"
-            android:layout_marginBottom="24dp" />
+            <!-- ÍCONE DE DECORAÇÃO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📜"
+                android:textSize="48dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp" />
 
-        <!-- BOTÃO: SALVAR -->
-        <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/botao_salvar"
-            android:background="@drawable/btn_primary_lunar"
-            android:textColor="@color/moon_dark_bg"
-            android:textSize="16sp"
-            android:padding="14dp"
-            android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif-medium" />
+            <!-- TÍTULO DA TELA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tela_cadastrar"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/moon_text_light"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp" />
 
-        <!-- TEXTO DECORATIVO -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✧ QUE KHONSHU TE GUIE ✧"
-            android:textSize="10sp"
-            android:textColor="@color/moon_gold_dim"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:alpha="0.5" />
+            <!-- CAMPO: PALAVRA -->
+            <EditText
+                android:id="@+id/editPalavra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_palavra"
+                android:background="@drawable/edittext_lunar"
+                android:textColor="@color/moon_text_light"
+                android:textColorHint="@color/moon_gold_dim"
+                android:inputType="textCapCharacters"
+                android:layout_marginBottom="16dp" />
+
+            <!-- CAMPO: TEMA -->
+            <EditText
+                android:id="@+id/editTema"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_tema"
+                android:background="@drawable/edittext_lunar"
+                android:textColor="@color/moon_text_light"
+                android:textColorHint="@color/moon_gold_dim"
+                android:inputType="textCapWords"
+                android:layout_marginBottom="24dp" />
+
+            <!-- BOTÃO: SALVAR -->
+            <Button
+                android:id="@+id/btnSalvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/botao_salvar"
+                android:background="@drawable/btn_primary_lunar"
+                android:textColor="@color/moon_dark_bg"
+                android:textSize="16sp"
+                android:padding="14dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium" />
+
+            <!-- TEXTO DECORATIVO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✧ QUE KHONSHU TE GUIE ✧"
+                android:textSize="10sp"
+                android:textColor="@color/moon_gold_dim"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:alpha="0.5" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
