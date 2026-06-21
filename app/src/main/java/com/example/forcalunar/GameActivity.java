@@ -5,10 +5,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.UserDictionary;
 import android.view.ViewGroup;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,10 +25,13 @@ import java.util.Random;
  * Gerencia a lógica do jogo, teclado virtual, timer e diálogos de resultado.
  */
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity{
 
     // ================ Banco de Dados de palavras =================
     private WordsDatabase wordsDatabase;
+
+    // ===================== SENSORES =====================
+    private SensorsManager sensorManager;
 
     // ===================== VARIÁVEIS DO JOGO =====================
     private String palavraSecretaOriginal;      // Palavra escolhida para a partida
@@ -84,6 +94,27 @@ public class GameActivity extends AppCompatActivity {
 
         // ===== 5. CRIA O TECLADO VIRTUAL =====
         criarTecladoVirtual();
+
+        // ===== 6. Inicializa o gerenciador de sensores =====
+        sensorManager = new SensorsManager(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Manda os sensores ligarem quando o usuário entra/volta pra tela
+        if (sensorManager != null) {
+            sensorManager.iniciarSensores();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Desativa para economizar bateria ao sair da tela
+        if (sensorManager != null) {
+            sensorManager.pararSensores();
+        }
     }
 
     /**
