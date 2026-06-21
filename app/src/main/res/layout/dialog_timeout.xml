@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    dialog_timeout.xml - Diálogo de Tempo Esgotado
+    Este diálogo é exibido quando o tempo da partida (3 minutos)
+    se esgota antes do jogador adivinhar a palavra.
+    Mostra a palavra que ele não conseguiu adivinhar e oferece
+    opções para reiniciar ou sair
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -6,6 +14,7 @@
     android:background="@drawable/bg_dialog_lunar"
     android:padding="0dp">
 
+    <!-- ÍCONE DO DIÁLOGO -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,6 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp" />
 
+    <!-- TÍTULO DO DIÁLOGO -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +34,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="12dp" />
 
+    <!-- MENSAGEM DO DIÁLOGO -->
     <TextView
         android:id="@+id/txtMensagemTempo"
         android:layout_width="wrap_content"
@@ -34,6 +45,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp" />
 
+    <!-- PALAVRA REVELADA -->
     <TextView
         android:id="@+id/txtPalavraTempo"
         android:layout_width="wrap_content"
@@ -50,6 +62,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp" />
 
+    <!-- BOTÕES DE AÇÃO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +73,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
+        <!-- Botão SAIR -->
         <Button
             android:id="@+id/btnSairTempo"
             style="@style/DialogButtonSecondary"
@@ -68,10 +82,12 @@
             android:text="@string/botao_sair"
             android:minWidth="100dp" />
 
+        <!-- Espaçamento entre botões -->
         <Space
             android:layout_width="12dp"
             android:layout_height="0dp" />
 
+        <!-- Botão NOVA PARTIDA -->
         <Button
             android:id="@+id/btnNovaPartidaTempo"
             style="@style/DialogButtonPrimary"
@@ -80,4 +96,5 @@
             android:text="@string/botao_nova_partida"
             android:minWidth="120dp" />
     </LinearLayout>
+
 </LinearLayout>
