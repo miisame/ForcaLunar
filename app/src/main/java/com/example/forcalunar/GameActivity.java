@@ -64,11 +64,16 @@ public class GameActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // ===== 1. RECUPERA O NICK DO JOGADOR =====
-        // O nick foi passado pela MainActivity via Intent
+        // ===== 1. RECUPERA OS DADOS DO JOGADOR =====
+        // O nick e avatar foram passados pela MainActivity via Intent
+        int avatarId = getIntent().getIntExtra("AVATAR_JOGADOR", android.R.drawable.star_big_on);
         String nick = getIntent().getStringExtra("nick");
+
+        ImageView imgAvatarGame = findViewById(R.id.imgAvatarGame);
         TextView txtNick = findViewById(R.id.txtNick);
+
         txtNick.setText(getString(R.string.jogador_label) + nick);
+        imgAvatarGame.setImageResource(avatarId);
 
         // ===== 2. VINCULA OS COMPONENTES DO LAYOUT =====
         txtTempo = findViewById(R.id.txtTempo);

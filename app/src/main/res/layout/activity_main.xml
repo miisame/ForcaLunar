@@ -17,6 +17,8 @@
         android:padding="32dp"
         android:layout_margin="16dp">
 
+
+
         <!-- Título -->
         <TextView
             android:layout_width="wrap_content"
@@ -34,6 +36,20 @@
             android:textColor="@color/moon_text_light"
             android:layout_gravity="center"
             android:layout_marginTop="8dp" />
+
+        <!-- Seleção de avatar -->
+        <ImageView
+            android:id="@+id/imgAvatarSelecionado"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:src="@android:drawable/ic_menu_camera"
+            android:background="@drawable/edittext_lunar"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Selecionar Avatar" />
 
         <!-- Campo de Nick -->
         <EditText

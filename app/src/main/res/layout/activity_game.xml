@@ -36,6 +36,18 @@
             android:orientation="horizontal"
             android:paddingBottom="8dp">
 
+            <!-- Imagem do avatar.-->
+            <ImageView
+                android:id="@+id/imgAvatarGame"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edittext_lunar"
+                android:padding="4dp"
+                android:contentDescription="Avatar do jogador"
+                android:scaleType="centerInside"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
             <!-- Nome do jogador -->
             <TextView
                 android:id="@+id/txtNick"
