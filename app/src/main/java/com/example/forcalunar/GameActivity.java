@@ -3,6 +3,7 @@ package com.example.forcalunar;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.UserDictionary;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,16 +20,13 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
-    // ===================== BANCO DE PALAVRAS =====================
-    // Lista inicial de 10 palavras (requisito do projeto)
-    private String[] palavras = {
-            "LUA", "CAVALO", "MARTELO", "ESTRELA", "ROBÔ",
-            "CAVEIRA", "FOGO", "DRAGÃO", "CAVERNA", "LANÇA"
-    };
+    // ================ Banco de Dados de palavras =================
+    private WordsDatabase wordsDatabase;
 
     // ===================== VARIÁVEIS DO JOGO =====================
     private String palavraSecretaOriginal;      // Palavra escolhida para a partida
     private StringBuilder palavraOculta;        // Palavra com _ para letras não reveladas
+    private String categoriaDaPalavra;
     private int erros = 0;                      // Número de erros (max 6)
     private ArrayList<Character> letrasTentadas = new ArrayList<>(); // Letras já usadas
 
@@ -71,6 +69,9 @@ public class GameActivity extends AppCompatActivity {
         imgForca.setContentDescription(getString(R.string.content_desc_forca, 0));
 
         // ===== 3. INICIALIZA O JOGO =====
+        // Inicializa o banco de dados
+        wordsDatabase = new WordsDatabase(this);
+
         iniciarJogo();
 
         // ===== 4. CARREGA O FRAGMENT DA FORCA =====
@@ -175,8 +176,11 @@ public class GameActivity extends AppCompatActivity {
      */
     private void iniciarJogo() {
         // ===== 1. ESCOLHE UMA PALAVRA ALEATÓRIA =====
-        Random rand = new Random();
-        palavraSecretaOriginal = palavras[rand.nextInt(palavras.length)].toUpperCase();
+        String[] dadosDaForca = wordsDatabase.obterPalavraAleatoria();
+        if (dadosDaForca != null) {
+            palavraSecretaOriginal = dadosDaForca[0];
+            categoriaDaPalavra = dadosDaForca[1];
+        }
 
         // ===== 2. CRIA A PALAVRA OCULTA COM UNDERSCORES =====
         // Exemplo: "CAVALO" vira "_ _ _ _ _ _"

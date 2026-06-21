@@ -13,28 +13,28 @@
     android:id="@+id/gameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="@drawable/bg_gradient_lunar"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <!-- CARD PRINCIPAL DO JOGO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/bg_card_lunar"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- LINHA: JOGADOR E TEMPO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/border_bottom_lunar">
+            android:background="@drawable/border_bottom_lunar"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
 
             <!-- Nome do jogador -->
             <TextView
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/jogador_label"
-                android:textSize="14sp"
-                android:textColor="@color/moon_gold_dim" />
+                android:textColor="@color/moon_gold_dim"
+                android:textSize="14sp" />
 
             <!-- Tempo restante -->
             <TextView
@@ -52,20 +52,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tempo_label"
-                android:textSize="14sp"
-                android:textColor="@color/moon_gold_dim" />
+                android:textColor="@color/moon_gold_dim"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- TÍTULO DO JOGO -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tela_jogo"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/moon_text_light"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:text="@string/tela_jogo"
+            android:textColor="@color/moon_text_light"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <!-- IMAGEM DA FORCA
              contentDescription: Descrição acessível para leitores de tela -->
@@ -73,24 +73,24 @@
             android:id="@+id/imgForca"
             android:layout_width="180dp"
             android:layout_height="180dp"
-            app:srcCompat="@drawable/forca_0"
             android:layout_gravity="center"
             android:layout_marginBottom="12dp"
-            android:contentDescription="@string/content_desc_forca" />
+            android:contentDescription="@string/content_desc_forca"
+            app:srcCompat="@drawable/forca_0" />
 
         <!-- PALAVRA OCULTA -->
         <TextView
             android:id="@+id/txtPalavraOculta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/palavra_oculta_placeholder"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            android:textColor="@color/moon_text_light"
-            android:letterSpacing="0.15"
+            android:layout_gravity="center"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center" />
+            android:letterSpacing="0.15"
+            android:text="@string/palavra_oculta_placeholder"
+            android:textColor="@color/moon_text_light"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <!-- TECLADO VIRTUAL
              Container para o teclado de letras (A-Z).
@@ -102,8 +102,8 @@
             android:id="@+id/tecladoContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
 
     </LinearLayout>
 

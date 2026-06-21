@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddWordActivity extends AppCompatActivity {
 
     // ===================== DECLARAÇÃO DE VARIÁVEIS =====================
-
+    private WordsDatabase wordsDatabase;
     private EditText editPalavra; // Campo de texto para digitar a palavra
     private EditText editTema; // Campo de texto para digitar o tema da palavra
     private Button btnSalvar; // Botão que salva a palavra cadastrada
@@ -30,6 +30,9 @@ public class AddWordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // ===================== INSTÂNCIA DO DATABASE =====================
+        wordsDatabase = new WordsDatabase(this);
 
         // Define o layout XML que será exibido nesta tela
         setContentView(R.layout.activity_add_word);
@@ -58,12 +61,21 @@ public class AddWordActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             } else {
                 // ===================== SALVAMENTO DA PALAVRA =====================
-                // TODO: Futuramente, salvar no banco de dados ou arquivo
-                // Por enquanto, apenas exibe uma mensagem de confirmação
+                boolean salvouComSucesso = wordsDatabase.inserirNovaPalavra(palavra, tema);
 
-                Toast.makeText(this,
-                        "Palavra cadastrada: " + palavra,
-                        Toast.LENGTH_SHORT).show();
+                if(salvouComSucesso)
+                {
+                    Toast.makeText(this,
+                            "Palavra cadastrada: " + palavra,
+                            Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this,
+                            "Erro ao cadastrar a palavra: " + palavra,
+                            Toast.LENGTH_SHORT).show();
+                }
+
 
                 // ===================== LIMPEZA DOS CAMPOS =====================
                 // Após cadastrar, limpa os campos para facilitar novo cadastro
