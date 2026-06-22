@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- btn_voltar_lunar.xml - Botão Voltar -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/moon_pressed_light" />
+            <stroke android:width="1.5dp" android:color="@color/moon_border_strong" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent" />
+            <stroke android:width="1.5dp" android:color="@color/moon_border_medium" />
+        </shape>
+    </item>
+</selector>
