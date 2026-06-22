@@ -17,20 +17,18 @@
         android:padding="32dp"
         android:layout_margin="16dp">
 
-
-
         <!-- Título -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🌙"
-            android:textSize="48dp"
+            android:text="@string/ic_lua"
+            android:textSize="48sp"
             android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FORCA LUNAR"
+            android:text="@string/titulo_app"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/moon_text_light"
@@ -49,14 +47,14 @@
             android:padding="8dp"
             android:clickable="true"
             android:focusable="true"
-            android:contentDescription="Selecionar Avatar" />
+            android:contentDescription="@string/desc_selecionar_avatar" />
 
         <!-- Campo de Nick -->
         <EditText
             android:id="@+id/editNick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite seu nick"
+            android:hint="@string/hint_nick"
             android:textColor="@color/moon_text_light"
             android:textColorHint="@color/moon_gold_dim"
             android:background="@drawable/edittext_lunar"
@@ -69,7 +67,7 @@
             android:id="@+id/btnIniciar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar"
+            android:text="@string/botao_iniciar"
             android:background="@drawable/btn_primary_lunar"
             android:textColor="@color/moon_dark_bg"
             android:textSize="16sp"

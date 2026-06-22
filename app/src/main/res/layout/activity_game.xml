@@ -29,11 +29,11 @@
             android:id="@+id/btnVoltarGame"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_voltar"
             android:background="@drawable/btn_voltar_lunar"
-            android:scaleType="centerInside"
+            android:contentDescription="@string/botao_voltar"
             android:padding="8dp"
-            android:contentDescription="Voltar" />
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_voltar" />
 
         <!-- Espaçamento flexível (empurra o botão da direita) -->
         <View
@@ -50,7 +50,7 @@
             android:background="@drawable/btn_voltar_lunar"
             android:scaleType="centerInside"
             android:padding="8dp"
-            android:contentDescription="Alternar teclado" />
+            android:contentDescription="@string/botao_altenar_teclado" />
 
     </LinearLayout>
 
@@ -66,10 +66,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginBottom="1dp"
             android:background="@drawable/bg_card_lunar"
-            android:padding="20dp"
-            android:layout_marginBottom="1dp">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <!-- LINHA: JOGADOR E TEMPO -->
             <LinearLayout
@@ -86,8 +86,8 @@
                     android:layout_height="32dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/edittext_lunar"
+                    android:contentDescription="@string/avatar_do_jogador"
                     android:padding="4dp"
-                    android:contentDescription="Avatar do jogador"
                     android:scaleType="centerInside"
                     app:srcCompat="@android:drawable/ic_menu_camera" />
 
@@ -98,15 +98,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/jogador_label"
-                    android:textSize="14sp"
-                    android:textColor="@color/moon_gold_dim" />
+                    android:textColor="@color/moon_gold_dim"
+                    android:textSize="14sp" />
 
                 <!-- Pontuação -->
                 <TextView
                     android:id="@+id/txtPontuacao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⭐ 0 pts"
+                    android:text="@string/pontuacao"
                     android:textSize="14sp"
                     android:textColor="@color/moon_gold"
                     android:layout_marginEnd="12dp" />
@@ -133,7 +133,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tela_jogo"
+                android:text="@string/titulo_jogo"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/moon_text_light"
@@ -165,9 +165,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center" />
 
-            <!-- ============================================================
-                 TECLADO NATIVO (visível apenas quando ativado)
-                 ============================================================ -->
+            <!-- TECLADO NATIVO (visível apenas quando ativado) -->
             <LinearLayout
                 android:id="@+id/layoutTecladoNativo"
                 android:layout_width="match_parent"
@@ -180,7 +178,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Letras tentadas: "
+                    android:text="@string/letras_tentadas"
                     android:textSize="14sp"
                     android:textColor="@color/moon_gold_dim"
                     android:layout_marginBottom="8dp"
@@ -191,7 +189,7 @@
                     android:id="@+id/txtLetrasTentadas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="-"
+                    android:text="@string/div_letras_tentadas"
                     android:textSize="18sp"
                     android:textColor="@color/moon_text_light"
                     android:gravity="center"
@@ -205,7 +203,7 @@
                     android:id="@+id/editTecladoNativo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Digite uma letra..."
+                    android:hint="@string/hint_letra_forca"
                     android:textColor="@color/moon_text_light"
                     android:textColorHint="@color/moon_gold_dim"
                     android:background="@drawable/edittext_lunar"
@@ -216,8 +214,6 @@
                     android:focusableInTouchMode="true" />
 
             </LinearLayout>
-
-
 
             <!-- TECLADO VIRTUAL
                  Container para o teclado de letras (A-Z).

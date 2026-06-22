@@ -3,10 +3,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Telas -->
-    <string name="titulo_app">Forca Lunar</string>
-    <string name="tela_jogo">Forca Lunar</string>
-    <string name="jogador_label">Jogador: </string>
-    <string name="tempo_label">Tempo: </string>
+    <string name="titulo_app">FORCA LUNAR</string>
+    <string name="titulo_jogo">Forca Lunar</string>
+    <string name="jogador_label">Jogador:ㅤ</string>
+    <string name="tempo_label">Tempo:ㅤ</string>
     <string name="palavra_oculta_placeholder">_____</string>
 
     <!-- Tela inicial -->
@@ -35,4 +35,19 @@
 
     <!-- Acessibilidade -->
     <string name="content_desc_forca">Imagem da forca mostrando %1$d erros</string>
+    <string name="botao_voltar">Voltar</string>
+    <string name="ic_cadastrar_palavra">📜</string>
+    <string name="texto_decorativo">✧ QUE KHONSHU TE GUIE ✧</string>
+    <string name="botao_altenar_teclado">Alternar teclado</string>
+    <string name="avatar_do_jogador">Avatar do jogador</string>
+    <string name="pontuacao">⭐ 0 pts</string>
+    <string name="letras_tentadas">Letras tentadas:</string>
+    <string name="div_letras_tentadas">-</string>
+    <string name="hint_letra_forca">Digite uma letra...</string>
+    <string name="ic_lua">🌙</string>
+    <string name="desc_selecionar_avatar">Selecionar Avatar</string>
+    <string name="ic_derrota">💀</string>
+    <string name="ic_tempo_esgotado">⏰</string>
+    <string name="ic_vitoria">🏆</string>
+    <string name="escolher_avatar">Escolha seu Avatar</string>
 </resources>
