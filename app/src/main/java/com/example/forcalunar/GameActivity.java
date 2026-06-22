@@ -50,6 +50,8 @@ public class GameActivity extends AppCompatActivity {
     private TextView txtPontuacao;              // TextView para exibir a pontuação
     private ImageButton btnAlternarTeclado;     // Botão para alternar entre teclados
     private EditText editTecladoNativo;         // Campo para o teclado nativo
+    private TextView txtLetrasTentadas;         // Exibe as letras já tentadas (teclado nativo)
+    private LinearLayout layoutTecladoNativo;   // Container do teclado nativo
 
     // ===================== CONTROLE DE TEMPO =====================
     private int tempoSegundos = 180;            // 3 minutos (180 segundos)
@@ -94,6 +96,8 @@ public class GameActivity extends AppCompatActivity {
         txtPontuacao = findViewById(R.id.txtPontuacao);
         btnAlternarTeclado = findViewById(R.id.btnAlternarTeclado);
         editTecladoNativo = findViewById(R.id.editTecladoNativo);
+        txtLetrasTentadas = findViewById(R.id.txtLetrasTentadas);
+        layoutTecladoNativo = findViewById(R.id.layoutTecladoNativo);
 
         // Define descrição acessível para a imagem da forca
         imgForca.setContentDescription(getString(R.string.content_desc_forca, 0));
@@ -134,6 +138,14 @@ public class GameActivity extends AppCompatActivity {
      * ela é capturada e processada pelo jogo.
      */
     private void configurarEntradaTecladoNativo() {
+
+        // Quando o EditText ganha foco, mostra o teclado nativo
+        editTecladoNativo.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && !usandoTecladoVirtual) {
+                showNativeKeyboard();
+            }
+        });
+
         editTecladoNativo.setOnEditorActionListener((v, actionId, event) -> {
             String texto = editTecladoNativo.getText().toString().trim();
             if (!texto.isEmpty()) {
@@ -145,7 +157,7 @@ public class GameActivity extends AppCompatActivity {
             return true;
         });
 
-        // Também captura quando o usuário digita letras (TextWatcher simplificado)
+        // Também captura quando o usuário digita letras
         editTecladoNativo.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == android.view.KeyEvent.ACTION_DOWN) {
                 // Verifica se é uma letra (A-Z)
@@ -169,8 +181,15 @@ public class GameActivity extends AppCompatActivity {
                 showNativeKeyboard();
             }
         });
+
+        // Força o EditText a ser clicável e focável
+        editTecladoNativo.setFocusable(true);
+        editTecladoNativo.setFocusableInTouchMode(true);
     }
 
+    /**
+     * Alterna entre teclado virtual (dinâmico) e teclado nativo (do sistema).
+     */
     /**
      * Alterna entre teclado virtual (dinâmico) e teclado nativo (do sistema).
      */
@@ -179,26 +198,47 @@ public class GameActivity extends AppCompatActivity {
 
         if (usandoTecladoVirtual) {
             // ===== TECLADO VIRTUAL =====
-            // Mostra o teclado virtual
             findViewById(R.id.tecladoContainer).setVisibility(View.VISIBLE);
-            // Esconde o campo do teclado nativo
-            editTecladoNativo.setVisibility(View.GONE);
-            // Esconde o teclado nativo (fecha se estiver aberto)
+            layoutTecladoNativo.setVisibility(View.GONE);
             hideNativeKeyboard();
-            // Limpa o campo de entrada
             editTecladoNativo.setText("");
-            // Atualiza ícone
             btnAlternarTeclado.setImageResource(R.drawable.ic_teclado);
         } else {
             // ===== TECLADO NATIVO =====
-            // Esconde o teclado virtual
             findViewById(R.id.tecladoContainer).setVisibility(View.GONE);
-            // Mostra o campo do teclado nativo
+
+            // Mostra o layout do teclado nativo
+            layoutTecladoNativo.setVisibility(View.VISIBLE);
+
+            // Garante que o EditText está visível (caso tenha sido alterado)
             editTecladoNativo.setVisibility(View.VISIBLE);
-            // Mostra o teclado nativo
-            showNativeKeyboard();
-            // Atualiza ícone
+
+            // Força o foco no EditText e mostra o teclado
+            editTecladoNativo.postDelayed(() -> {
+                editTecladoNativo.requestFocus();
+                showNativeKeyboard();
+            }, 300);
+
+            atualizarLetrasTentadas();
             btnAlternarTeclado.setImageResource(R.drawable.ic_teclado_off);
+        }
+    }
+
+    /**
+     * Atualiza a exibição das letras já tentadas.
+     * Usado apenas quando o teclado nativo está ativo.
+     */
+    private void atualizarLetrasTentadas() {
+        if (txtLetrasTentadas == null) return;
+
+        if (letrasTentadas.isEmpty()) {
+            txtLetrasTentadas.setText("-");
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (Character c : letrasTentadas) {
+                sb.append(c).append(" ");
+            }
+            txtLetrasTentadas.setText(sb.toString().trim());
         }
     }
 
@@ -329,6 +369,7 @@ public class GameActivity extends AppCompatActivity {
         letrasTentadas.clear();              // Limpa letras usadas
         reiniciarTeclado();                  // Reativa todos os botões
         atualizarPontuacao();                // Atualiza exibição da pontuação
+        atualizarLetrasTentadas();           // Atualiza exibição das letras tentadas
 
         // Limpa o campo de entrada do teclado nativo
         editTecladoNativo.setText("");
@@ -404,6 +445,11 @@ public class GameActivity extends AppCompatActivity {
         txtPalavraOculta.setText(palavraOculta.toString().trim());
         atualizarPontuacao();                   // Atualiza pontuação na tela
 
+        // ===== SE TECLADO NATIVO, ATUALIZA AS LETRAS TENTADAS =====
+        if (!usandoTecladoVirtual) {
+            atualizarLetrasTentadas();
+        }
+
         // ===== VERIFICA FIM DE JOGO =====
         // Vitória: não há mais underscores (_) na palavra
         if (palavraOculta.indexOf("_") == -1) {
@@ -443,22 +489,22 @@ public class GameActivity extends AppCompatActivity {
         // Configura botão "Sair"
         Button btnSair = dialog.findViewById(R.id.btnSairVitoria);
         btnSair.setOnClickListener(v -> {
-            dialog.dismiss();
             // ===== PARA O EFEITO SONORO =====
             if (audioManager != null) {
                 audioManager.pararEfeito();
             }
+            dialog.dismiss();
             finish();  // Volta para a tela inicial
         });
 
         // Configura botão "Nova Partida"
         Button btnNovaPartida = dialog.findViewById(R.id.btnNovaPartidaVitoria);
         btnNovaPartida.setOnClickListener(v -> {
-            dialog.dismiss();
             // ===== PARA O EFEITO SONORO =====
             if (audioManager != null) {
                 audioManager.pararEfeito();
             }
+            dialog.dismiss();
             iniciarJogo();  // Reinicia o jogo
         });
 
@@ -489,22 +535,21 @@ public class GameActivity extends AppCompatActivity {
 
         Button btnSair = dialog.findViewById(R.id.btnSairDerrota);
         btnSair.setOnClickListener(v -> {
-            dialog.dismiss();
             // ===== PARA O EFEITO SONORO =====
             if (audioManager != null) {
                 audioManager.pararEfeito();
             }
+            dialog.dismiss();
             finish();
         });
 
         Button btnNovaPartida = dialog.findViewById(R.id.btnNovaPartidaDerrota);
         btnNovaPartida.setOnClickListener(v -> {
-            dialog.dismiss();
             // ===== PARA O EFEITO SONORO =====
             if (audioManager != null) {
                 audioManager.pararEfeito();
             }
-
+            dialog.dismiss();
             iniciarJogo();
         });
 
@@ -535,21 +580,21 @@ public class GameActivity extends AppCompatActivity {
 
         Button btnSair = dialog.findViewById(R.id.btnSairTempo);
         btnSair.setOnClickListener(v -> {
-            dialog.dismiss();
             // ===== PARA O EFEITO SONORO =====
             if (audioManager != null) {
                 audioManager.pararEfeito();
             }
+            dialog.dismiss();
             finish();
         });
 
         Button btnNovaPartida = dialog.findViewById(R.id.btnNovaPartidaTempo);
         btnNovaPartida.setOnClickListener(v -> {
-            dialog.dismiss();
             // ===== PARA O EFEITO SONORO =====
             if (audioManager != null) {
                 audioManager.pararEfeito();
             }
+            dialog.dismiss();
             iniciarJogo();
         });
 
