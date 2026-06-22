@@ -424,6 +424,11 @@ public class GameActivity extends AppCompatActivity {
     private void mostrarDialogVitoria() {
         pararTimer();  // Para o timer ao finalizar
 
+        // ===== TOCA EFEITO SONORO DE VITÓRIA =====
+        if (audioManager != null) {
+            audioManager.tocarVitoria(this);
+        }
+
         Dialog dialog = new Dialog(this, R.style.CustomDialogTheme);
         dialog.setContentView(R.layout.dialog_victory);
         dialog.setCancelable(false);  // Impede fechar com botão voltar
@@ -439,6 +444,10 @@ public class GameActivity extends AppCompatActivity {
         Button btnSair = dialog.findViewById(R.id.btnSairVitoria);
         btnSair.setOnClickListener(v -> {
             dialog.dismiss();
+            // ===== PARA O EFEITO SONORO =====
+            if (audioManager != null) {
+                audioManager.pararEfeito();
+            }
             finish();  // Volta para a tela inicial
         });
 
@@ -446,6 +455,10 @@ public class GameActivity extends AppCompatActivity {
         Button btnNovaPartida = dialog.findViewById(R.id.btnNovaPartidaVitoria);
         btnNovaPartida.setOnClickListener(v -> {
             dialog.dismiss();
+            // ===== PARA O EFEITO SONORO =====
+            if (audioManager != null) {
+                audioManager.pararEfeito();
+            }
             iniciarJogo();  // Reinicia o jogo
         });
 
@@ -458,6 +471,11 @@ public class GameActivity extends AppCompatActivity {
      */
     private void mostrarDialogDerrota() {
         pararTimer();
+
+        // ===== TOCA EFEITO SONORO DE DERROTA =====
+        if (audioManager != null) {
+            audioManager.tocarDerrota(this);
+        }
 
         Dialog dialog = new Dialog(this, R.style.CustomDialogTheme);
         dialog.setContentView(R.layout.dialog_defeat);
@@ -472,12 +490,21 @@ public class GameActivity extends AppCompatActivity {
         Button btnSair = dialog.findViewById(R.id.btnSairDerrota);
         btnSair.setOnClickListener(v -> {
             dialog.dismiss();
+            // ===== PARA O EFEITO SONORO =====
+            if (audioManager != null) {
+                audioManager.pararEfeito();
+            }
             finish();
         });
 
         Button btnNovaPartida = dialog.findViewById(R.id.btnNovaPartidaDerrota);
         btnNovaPartida.setOnClickListener(v -> {
             dialog.dismiss();
+            // ===== PARA O EFEITO SONORO =====
+            if (audioManager != null) {
+                audioManager.pararEfeito();
+            }
+
             iniciarJogo();
         });
 
@@ -490,6 +517,11 @@ public class GameActivity extends AppCompatActivity {
      */
     private void mostrarDialogTempoEsgotado() {
         pararTimer();
+
+        // ===== TOCA EFEITO SONORO DE DERROTA =====
+        if (audioManager != null) {
+            audioManager.tocarDerrota(this);
+        }
 
         Dialog dialog = new Dialog(this, R.style.CustomDialogTheme);
         dialog.setContentView(R.layout.dialog_timeout);
@@ -504,12 +536,20 @@ public class GameActivity extends AppCompatActivity {
         Button btnSair = dialog.findViewById(R.id.btnSairTempo);
         btnSair.setOnClickListener(v -> {
             dialog.dismiss();
+            // ===== PARA O EFEITO SONORO =====
+            if (audioManager != null) {
+                audioManager.pararEfeito();
+            }
             finish();
         });
 
         Button btnNovaPartida = dialog.findViewById(R.id.btnNovaPartidaTempo);
         btnNovaPartida.setOnClickListener(v -> {
             dialog.dismiss();
+            // ===== PARA O EFEITO SONORO =====
+            if (audioManager != null) {
+                audioManager.pararEfeito();
+            }
             iniciarJogo();
         });
 
