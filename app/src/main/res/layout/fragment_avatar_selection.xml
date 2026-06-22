@@ -28,35 +28,39 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@android:drawable/star_big_on"
+            android:src="@drawable/avatar_marc_spector"
             android:background="@drawable/edittext_lunar"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/avatar2"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@android:drawable/ic_menu_compass"
+            android:src="@drawable/avatar_steven_grant"
             android:background="@drawable/edittext_lunar"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/avatar3"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@android:drawable/ic_menu_agenda"
+            android:src="@drawable/avatar_jake_lockley"
             android:background="@drawable/edittext_lunar"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/avatar4"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="8dp"
-            android:src="@android:drawable/ic_menu_gallery"
+            android:src="@drawable/avatar_konshu"
             android:background="@drawable/edittext_lunar"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:scaleType="centerCrop" />
     </GridLayout>
 </LinearLayout>

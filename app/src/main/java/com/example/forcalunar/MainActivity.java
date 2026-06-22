@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentResultListener;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView imgAvatarSelecionado;
-    private int avatarEscolhidoId = android.R.drawable.star_big_on;
+    private int avatarEscolhidoId = R.drawable.avatar_marc_spector;
     private AudioManager audioManager;  // Gerenciador de áudio
 
     @Override

@@ -47,7 +47,8 @@
             android:padding="8dp"
             android:clickable="true"
             android:focusable="true"
-            android:contentDescription="@string/desc_selecionar_avatar" />
+            android:contentDescription="@string/desc_selecionar_avatar"
+            android:scaleType="centerCrop"/>
 
         <!-- Campo de Nick -->
         <EditText
