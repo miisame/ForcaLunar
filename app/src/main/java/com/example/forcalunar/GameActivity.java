@@ -4,6 +4,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.UserDictionary;
+import android.view.ViewGroup;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -13,6 +20,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Random;
@@ -22,8 +31,13 @@ import java.util.Random;
  * Gerencia a lógica do jogo, teclado virtual, timer e diálogos de resultado.
  */
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity{
 
+    // ================ Banco de Dados de palavras =================
+    private WordsDatabase wordsDatabase;
+
+    // ===================== SENSORES =====================
+    private SensorsManager sensorManager;
     private AudioManager audioManager;      // Gerenciador de áudio
 
     // ===================== BANCO DE PALAVRAS =====================
@@ -36,6 +50,7 @@ public class GameActivity extends AppCompatActivity {
     // ===================== VARIÁVEIS DO JOGO =====================
     private String palavraSecretaOriginal;      // Palavra escolhida para a partida
     private StringBuilder palavraOculta;        // Palavra com _ para letras não reveladas
+    private String categoriaDaPalavra;
     private int erros = 0;                      // Número de erros (max 6)
     private ArrayList<Character> letrasTentadas = new ArrayList<>(); // Letras já usadas
     private int pontuacao = 0;
@@ -78,6 +93,9 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // ===== 1. RECUPERA OS DADOS DO JOGADOR =====
+        // O nick e avatar foram passados pela MainActivity via Intent
+        int avatarId = getIntent().getIntExtra("AVATAR_JOGADOR", android.R.drawable.star_big_on);
         // ===== INICIA A MÚSICA DE FUNDO =====
         audioManager = new AudioManager();
         audioManager.tocarMusicaFundo(this);
@@ -85,8 +103,12 @@ public class GameActivity extends AppCompatActivity {
         // ===== 1. RECUPERA O NICK DO JOGADOR =====
         // O nick foi passado pela MainActivity via Intent
         String nick = getIntent().getStringExtra("nick");
+
+        ImageView imgAvatarGame = findViewById(R.id.imgAvatarGame);
         TextView txtNick = findViewById(R.id.txtNick);
+
         txtNick.setText(getString(R.string.jogador_label) + nick);
+        imgAvatarGame.setImageResource(avatarId);
 
         // ===== 2. VINCULA OS COMPONENTES DO LAYOUT =====
         txtTempo = findViewById(R.id.txtTempo);
@@ -101,6 +123,10 @@ public class GameActivity extends AppCompatActivity {
 
         // Define descrição acessível para a imagem da forca
         imgForca.setContentDescription(getString(R.string.content_desc_forca, 0));
+
+        // ===== 3. INICIALIZA O JOGO =====
+        // Inicializa o banco de dados
+        wordsDatabase = new WordsDatabase(this);
 
         // ===== 3. CONFIGURA O BOTÃO VOLTAR =====
         // Define o comportamento quando o botão "Voltar" for clicado
@@ -130,6 +156,27 @@ public class GameActivity extends AppCompatActivity {
 
         // ===== 8. CRIA O TECLADO VIRTUAL =====
         criarTecladoVirtual();
+
+        // ===== 6. Inicializa o gerenciador de sensores =====
+        sensorManager = new SensorsManager(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Manda os sensores ligarem quando o usuário entra/volta pra tela
+        if (sensorManager != null) {
+            sensorManager.iniciarSensores();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Desativa para economizar bateria ao sair da tela
+        if (sensorManager != null) {
+            sensorManager.pararSensores();
+        }
     }
 
     /**
@@ -350,8 +397,11 @@ public class GameActivity extends AppCompatActivity {
      */
     private void iniciarJogo() {
         // ===== 1. ESCOLHE UMA PALAVRA ALEATÓRIA =====
-        Random rand = new Random();
-        palavraSecretaOriginal = palavras[rand.nextInt(palavras.length)].toUpperCase();
+        String[] dadosDaForca = wordsDatabase.obterPalavraAleatoria();
+        if (dadosDaForca != null) {
+            palavraSecretaOriginal = dadosDaForca[0];
+            categoriaDaPalavra = dadosDaForca[1];
+        }
 
         // ===== 2. CRIA A PALAVRA OCULTA COM UNDERSCORES =====
         // Exemplo: "CAVALO" vira "_ _ _ _ _ _"
