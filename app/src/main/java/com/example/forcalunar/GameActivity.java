@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity{
 
     /**
      * Chamado quando a Activity é criada.
-     * Inicializa componentes, carrega o fragment e cria o teclado.
+     * Inicializa componentes e cria o teclado.
      * @param savedInstanceState Estado salvo anteriormente (se houver)
      */
 
@@ -145,14 +145,6 @@ public class GameActivity extends AppCompatActivity{
 
         // ===== 6. INICIALIZA O JOGO =====
         iniciarJogo();
-
-        // ===== 7. CARREGA O FRAGMENT DA FORCA =====
-        // O fragment é exibido no FrameLayout com ID fragmentContainer
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, new ForcaFragment())
-                    .commit();
-        }
 
         // ===== 8. CRIA O TECLADO VIRTUAL =====
         criarTecladoVirtual();
