@@ -12,7 +12,7 @@ import androidx.core.database.sqlite.SQLiteDatabaseKt;
 public class WordsDatabase extends SQLiteOpenHelper
 {
     private static final String DATABASE_NAME = "PalavrasForcaLunarApp.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Constantes da Tabela
     public static final String TABLE_NAME = "palavras";
@@ -46,12 +46,16 @@ public class WordsDatabase extends SQLiteOpenHelper
     // Método para inserir dados padrões (Matriz de Strings)
     private void popularBancoInicial(SQLiteDatabase db) {
         String[][] listaPalavras = {
-                {"BANANA", "FRUTAS"},
-                {"MORANGO", "FRUTAS"},
-                {"CARRO", "TRANSPORTE"},
-                {"AVIAO", "TRANSPORTE"},
-                {"CACHORRO", "ANIMAIS"},
-                {"ELEFANTE", "ANIMAIS"}
+                {"KHONSHU", "DEUS EGÍPICIO"},
+                {"ESCARAVELHO", "INSETO"},
+                {"MUSEU", "LUGAR"},
+                {"TUMBA", "LUGAR"},
+                {"PIRAMIDE", "LUGAR"},
+                {"ECLIPSE", "LUA"},
+                {"SANATORIO", "LUGAR"},
+                {"BANDAGEM", "PRIMEIROS SOCORROS"},
+                {"CHACAL", "CRIATURA"},
+                {"MUMIA", "CRIATURA"},
         };
 
         for (String[] item : listaPalavras) {
@@ -108,4 +112,6 @@ public class WordsDatabase extends SQLiteOpenHelper
         // Retorna true se deu certo (id diferente de -1) ou false se deu erro
         return resultado != -1;
     }
+
+
 }
