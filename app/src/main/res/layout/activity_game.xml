@@ -131,14 +131,15 @@
 
             <!-- TÍTULO DO JOGO -->
             <TextView
+                android:id="@+id/txtCategoriaDaPalavra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/titulo_jogo"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/moon_text_light"
                 android:layout_gravity="center"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:text="@string/titulo_jogo"
+                android:textColor="@color/moon_text_light"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <!-- IMAGEM DA FORCA
                  contentDescription: Descrição acessível para leitores de tela -->

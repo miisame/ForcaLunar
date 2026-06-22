@@ -58,6 +58,7 @@ public class GameActivity extends AppCompatActivity{
 
     // ===================== COMPONENTES DA INTERFACE =====================
     private TextView txtPalavraOculta;          // Exibe a palavra com _
+    private TextView txtCategoriaPalavra;
     private ImageView imgForca;                 // Imagem da forca
     private TextView txtTempo;                  // Exibe o tempo restante
     private ArrayList<Button> botoesTeclado = new ArrayList<>(); // Lista de botões do teclado
@@ -113,6 +114,7 @@ public class GameActivity extends AppCompatActivity{
         // ===== 2. VINCULA OS COMPONENTES DO LAYOUT =====
         txtTempo = findViewById(R.id.txtTempo);
         txtPalavraOculta = findViewById(R.id.txtPalavraOculta);
+        txtCategoriaPalavra = findViewById(R.id.txtCategoriaDaPalavra);
         imgForca = findViewById(R.id.imgForca);
         btnVoltarGame = findViewById(R.id.btnVoltarGame);
         txtPontuacao = findViewById(R.id.txtPontuacao);
@@ -393,6 +395,7 @@ public class GameActivity extends AppCompatActivity{
         if (dadosDaForca != null) {
             palavraSecretaOriginal = dadosDaForca[0];
             categoriaDaPalavra = dadosDaForca[1];
+            txtCategoriaPalavra.setText(categoriaDaPalavra);
         }
 
         // ===== 2. CRIA A PALAVRA OCULTA COM UNDERSCORES =====
