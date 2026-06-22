@@ -24,6 +24,8 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
+    private AudioManager audioManager;      // Gerenciador de áudio
+
     // ===================== BANCO DE PALAVRAS =====================
     // Lista inicial de 10 palavras (requisito do projeto)
     private String[] palavras = {
@@ -73,6 +75,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // ===== INICIA A MÚSICA DE FUNDO =====
+        audioManager = new AudioManager();
+        audioManager.tocarMusicaFundo(this);
 
         // ===== 1. RECUPERA O NICK DO JOGADOR =====
         // O nick foi passado pela MainActivity via Intent
@@ -563,5 +569,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         pararTimer();
+        if (audioManager != null) {
+            audioManager.pararMusica();  // Garante que para ao fechar
+        }
     }
 }

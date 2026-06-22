@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddWordActivity extends AppCompatActivity {
 
+    private AudioManager audioManager;  // Gerenciador de áudio
+
     // ===================== DECLARAÇÃO DE VARIÁVEIS =====================
 
     private EditText editPalavra; // Campo de texto para digitar a palavra
@@ -35,6 +37,10 @@ public class AddWordActivity extends AppCompatActivity {
 
         // Define o layout XML que será exibido nesta tela
         setContentView(R.layout.activity_add_word);
+
+        // ===== INICIA A MÚSICA DE FUNDO =====
+        audioManager = new AudioManager();
+        audioManager.tocarMusicaFundo(this);
 
         // ===================== VINCULAÇÃO DOS COMPONENTES =====================
 
@@ -80,5 +86,14 @@ public class AddWordActivity extends AppCompatActivity {
                 editTema.setText("");
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Para a música ao destruir a Activity
+        if (audioManager != null) {
+            audioManager.pararMusica();
+        }
     }
 }
