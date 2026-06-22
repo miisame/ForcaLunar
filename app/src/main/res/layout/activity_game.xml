@@ -16,25 +16,45 @@
     android:padding="12dp"
     android:background="@drawable/bg_gradient_lunar">
 
-    <!-- ============================================================
-             BOTÃO VOLTAR (canto superior esquerdo)
-             ============================================================
-             Botão de navegação que permite ao usuário voltar à tela inicial.
-             Posicionado no canto superior esquerdo da tela, fora do card.
-             Usa o mesmo drawable da tela de cadastro.
-        -->
-    <ImageButton
-        android:id="@+id/btnVoltarGame"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_voltar"
-        android:background="@drawable/btn_voltar_lunar"
-        android:scaleType="centerInside"
-        android:padding="8dp"
-        android:layout_gravity="start"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="Voltar" />
+    <!-- LINHA SUPERIOR: BOTÃO VOLTAR (ESQUERDA) E BOTÃO TECLADO (DIREITA) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
 
+        <!-- Botão Voltar (canto superior esquerdo) -->
+        <ImageButton
+            android:id="@+id/btnVoltarGame"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_voltar"
+            android:background="@drawable/btn_voltar_lunar"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:contentDescription="Voltar" />
+
+        <!-- Espaçamento flexível (empurra o botão da direita) -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Botão Alternar Teclado (canto superior direito) -->
+        <ImageButton
+            android:id="@+id/btnAlternarTeclado"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_teclado"
+            android:background="@drawable/btn_voltar_lunar"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:contentDescription="Alternar teclado" />
+
+    </LinearLayout>
+
+    <!-- CONTEÚDO CENTRALIZADO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,17 +108,6 @@
                     android:textSize="14sp"
                     android:textColor="@color/moon_gold_dim" />
 
-                <!-- BOTÃO PARA ALTERNAR TECLADO -->
-                <ImageButton
-                    android:id="@+id/btnAlternarTeclado"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_teclado"
-                    android:background="@drawable/btn_voltar_lunar"
-                    android:scaleType="centerInside"
-                    android:padding="4dp"
-                    android:layout_marginStart="8dp"
-                    android:contentDescription="Alternar teclado" />
             </LinearLayout>
 
             <!-- LINHA DIVISÓRIA (ABAIXO DO NOME E TEMPO) -->
