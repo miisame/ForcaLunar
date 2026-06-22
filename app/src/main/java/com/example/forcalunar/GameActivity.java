@@ -1,10 +1,14 @@
 package com.example.forcalunar;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,7 +16,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Random;
-import android.widget.ImageButton;
 
 /**
  * Activity principal do jogo da forca.
@@ -42,12 +45,17 @@ public class GameActivity extends AppCompatActivity {
     private TextView txtTempo;                  // Exibe o tempo restante
     private ArrayList<Button> botoesTeclado = new ArrayList<>(); // Lista de botões do teclado
     private ImageButton btnVoltarGame;          // Botão para voltar à tela inicial
-    private TextView txtPontuacao;               // TextView para exibir a pontuação
+    private TextView txtPontuacao;              // TextView para exibir a pontuação
+    private ImageButton btnAlternarTeclado;     // Botão para alternar entre teclados
+    private EditText editTecladoNativo;         // Campo para o teclado nativo
 
     // ===================== CONTROLE DE TEMPO =====================
     private int tempoSegundos = 180;            // 3 minutos (180 segundos)
     private Handler timerHandler = new Handler(); // Gerencia o timer
     private Runnable timerRunnable;             // Ação executada a cada segundo
+
+    // ===================== CONTROLE DE TECLADO =====================
+    private boolean usandoTecladoVirtual = true;  // true = teclado virtual, false = teclado nativo
 
     // ===================== CONSTANTES DE PONTUAÇÃO =====================
     private static final int PONTOS_POR_LETRA = 100;      // 100 pontos por letra acertada
@@ -78,6 +86,8 @@ public class GameActivity extends AppCompatActivity {
         imgForca = findViewById(R.id.imgForca);
         btnVoltarGame = findViewById(R.id.btnVoltarGame);
         txtPontuacao = findViewById(R.id.txtPontuacao);
+        btnAlternarTeclado = findViewById(R.id.btnAlternarTeclado);
+        editTecladoNativo = findViewById(R.id.editTecladoNativo);
 
         // Define descrição acessível para a imagem da forca
         imgForca.setContentDescription(getString(R.string.content_desc_forca, 0));
@@ -89,10 +99,18 @@ public class GameActivity extends AppCompatActivity {
             finish();      // Fecha a Activity e volta para a tela anterior
         });
 
-        // ===== 3. INICIALIZA O JOGO =====
+        // ===== 4. CONFIGURA O BOTÃO ALTERNAR TECLADO =====
+        // Define o comportamento quando o botão de alternar teclado for clicado
+        btnAlternarTeclado.setOnClickListener(v -> alternarTeclado());
+
+        // ===== 5. CONFIGURA O TECLADO NATIVO =====
+        // O teclado nativo será ativado quando o usuário digitar no EditText
+        configurarEntradaTecladoNativo();
+
+        // ===== 6. INICIALIZA O JOGO =====
         iniciarJogo();
 
-        // ===== 4. CARREGA O FRAGMENT DA FORCA =====
+        // ===== 7. CARREGA O FRAGMENT DA FORCA =====
         // O fragment é exibido no FrameLayout com ID fragmentContainer
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -100,8 +118,99 @@ public class GameActivity extends AppCompatActivity {
                     .commit();
         }
 
-        // ===== 5. CRIA O TECLADO VIRTUAL =====
+        // ===== 8. CRIA O TECLADO VIRTUAL =====
         criarTecladoVirtual();
+    }
+
+    /**
+     * Configura a entrada do teclado nativo (do sistema).
+     * Quando o usuário digita uma letra no campo editTecladoNativo,
+     * ela é capturada e processada pelo jogo.
+     */
+    private void configurarEntradaTecladoNativo() {
+        editTecladoNativo.setOnEditorActionListener((v, actionId, event) -> {
+            String texto = editTecladoNativo.getText().toString().trim();
+            if (!texto.isEmpty()) {
+                // Pega a última letra digitada
+                char letra = texto.charAt(texto.length() - 1);
+                verificarLetra(Character.toUpperCase(letra));
+                editTecladoNativo.setText("");  // Limpa o campo após a entrada
+            }
+            return true;
+        });
+
+        // Também captura quando o usuário digita letras (TextWatcher simplificado)
+        editTecladoNativo.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == android.view.KeyEvent.ACTION_DOWN) {
+                // Verifica se é uma letra (A-Z)
+                char letra = (char) event.getUnicodeChar();
+                if (Character.isLetter(letra)) {
+                    // Limpa o campo antes de processar para evitar duplicação
+                    String texto = editTecladoNativo.getText().toString().trim();
+                    if (!texto.isEmpty()) {
+                        char letraDigitada = texto.charAt(texto.length() - 1);
+                        verificarLetra(Character.toUpperCase(letraDigitada));
+                        editTecladoNativo.setText("");
+                    }
+                }
+            }
+            return false;
+        });
+
+        // Quando o campo ganha foco, mostra o teclado nativo
+        editTecladoNativo.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && !usandoTecladoVirtual) {
+                showNativeKeyboard();
+            }
+        });
+    }
+
+    /**
+     * Alterna entre teclado virtual (dinâmico) e teclado nativo (do sistema).
+     */
+    private void alternarTeclado() {
+        usandoTecladoVirtual = !usandoTecladoVirtual;
+
+        if (usandoTecladoVirtual) {
+            // ===== TECLADO VIRTUAL =====
+            // Mostra o teclado virtual
+            findViewById(R.id.tecladoContainer).setVisibility(View.VISIBLE);
+            // Esconde o campo do teclado nativo
+            editTecladoNativo.setVisibility(View.GONE);
+            // Esconde o teclado nativo (fecha se estiver aberto)
+            hideNativeKeyboard();
+            // Limpa o campo de entrada
+            editTecladoNativo.setText("");
+            // Atualiza ícone
+            btnAlternarTeclado.setImageResource(R.drawable.ic_teclado);
+        } else {
+            // ===== TECLADO NATIVO =====
+            // Esconde o teclado virtual
+            findViewById(R.id.tecladoContainer).setVisibility(View.GONE);
+            // Mostra o campo do teclado nativo
+            editTecladoNativo.setVisibility(View.VISIBLE);
+            // Mostra o teclado nativo
+            showNativeKeyboard();
+            // Atualiza ícone
+            btnAlternarTeclado.setImageResource(R.drawable.ic_teclado_off);
+        }
+    }
+
+    /**
+     * Mostra o teclado nativo (do sistema) no campo da palavra.
+     */
+    private void showNativeKeyboard() {
+        editTecladoNativo.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editTecladoNativo, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    /**
+     * Esconde o teclado nativo (do sistema).
+     */
+    private void hideNativeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editTecladoNativo.getWindowToken(), 0);
     }
 
     /**
@@ -208,9 +317,15 @@ public class GameActivity extends AppCompatActivity {
 
         // ===== 3. RESETA OS DADOS DO JOGO =====
         erros = 0;
-        atualizarImagemForca();          // Mostra a forca com 0 erros
-        letrasTentadas.clear();          // Limpa letras usadas
-        reiniciarTeclado();              // Reativa todos os botões
+        letrasAcertadas = 0;                 // Zera contador de letras acertadas
+        //pontuacao = 0;                       // Zera pontuação
+        atualizarImagemForca();              // Mostra a forca com 0 erros
+        letrasTentadas.clear();              // Limpa letras usadas
+        reiniciarTeclado();                  // Reativa todos os botões
+        atualizarPontuacao();                // Atualiza exibição da pontuação
+
+        // Limpa o campo de entrada do teclado nativo
+        editTecladoNativo.setText("");
 
         // ===== 4. REINICIA O TIMER =====
         pararTimer();
@@ -311,6 +426,9 @@ public class GameActivity extends AppCompatActivity {
         TextView txtPalavra = dialog.findViewById(R.id.txtPalavraVitoria);
         txtPalavra.setText(palavraSecretaOriginal);
 
+        // Adiciona a pontuação na mensagem de vitória
+        TextView txtMensagem = dialog.findViewById(R.id.txtMensagemVitoria);
+
         // Configura botão "Sair"
         Button btnSair = dialog.findViewById(R.id.btnSairVitoria);
         btnSair.setOnClickListener(v -> {
@@ -342,6 +460,9 @@ public class GameActivity extends AppCompatActivity {
         TextView txtPalavra = dialog.findViewById(R.id.txtPalavraDerrota);
         txtPalavra.setText(palavraSecretaOriginal);
 
+        // Adiciona a pontuação na mensagem de derrota
+        TextView txtMensagem = dialog.findViewById(R.id.txtMensagemDerrota);
+
         Button btnSair = dialog.findViewById(R.id.btnSairDerrota);
         btnSair.setOnClickListener(v -> {
             dialog.dismiss();
@@ -370,6 +491,9 @@ public class GameActivity extends AppCompatActivity {
 
         TextView txtPalavra = dialog.findViewById(R.id.txtPalavraTempo);
         txtPalavra.setText(palavraSecretaOriginal);
+
+        // Adiciona a pontuação na mensagem de tempo esgotado
+        TextView txtMensagem = dialog.findViewById(R.id.txtMensagemTempo);
 
         Button btnSair = dialog.findViewById(R.id.btnSairTempo);
         btnSair.setOnClickListener(v -> {

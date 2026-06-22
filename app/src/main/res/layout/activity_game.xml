@@ -87,6 +87,18 @@
                     android:text="@string/tempo_label"
                     android:textSize="14sp"
                     android:textColor="@color/moon_gold_dim" />
+
+                <!-- BOTÃO PARA ALTERNAR TECLADO -->
+                <ImageButton
+                    android:id="@+id/btnAlternarTeclado"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_teclado"
+                    android:background="@drawable/btn_voltar_lunar"
+                    android:scaleType="centerInside"
+                    android:padding="4dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="Alternar teclado" />
             </LinearLayout>
 
             <!-- LINHA DIVISÓRIA (ABAIXO DO NOME E TEMPO) -->
@@ -131,6 +143,21 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center" />
+
+            <!-- CAMPO PARA TECLADO NATIVO (INVISÍVEL POR PADRÃO) -->
+            <EditText
+                android:id="@+id/editTecladoNativo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite uma letra..."
+                android:textColor="@color/moon_text_light"
+                android:textColorHint="@color/moon_gold_dim"
+                android:background="@drawable/edittext_lunar"
+                android:padding="12dp"
+                android:inputType="textCapCharacters"
+                android:maxLength="1"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp" />
 
             <!-- TECLADO VIRTUAL
                  Container para o teclado de letras (A-Z).
