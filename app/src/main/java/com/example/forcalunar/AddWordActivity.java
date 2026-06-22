@@ -3,6 +3,7 @@ package com.example.forcalunar;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,11 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddWordActivity extends AppCompatActivity {
 
+    private AudioManager audioManager;  // Gerenciador de áudio
+
     // ===================== DECLARAÇÃO DE VARIÁVEIS =====================
     private WordsDatabase wordsDatabase;
     private EditText editPalavra; // Campo de texto para digitar a palavra
     private EditText editTema; // Campo de texto para digitar o tema da palavra
     private Button btnSalvar; // Botão que salva a palavra cadastrada
+    private ImageButton btnVoltar; // Botão para voltar à tela inicial
 
     // ===================== CICLO DE VIDA DA ACTIVITY =====================
 
@@ -37,12 +41,23 @@ public class AddWordActivity extends AppCompatActivity {
         // Define o layout XML que será exibido nesta tela
         setContentView(R.layout.activity_add_word);
 
+        // ===== INICIA A MÚSICA DE FUNDO =====
+        audioManager = new AudioManager();
+        audioManager.tocarMusicaFundo(this);
+
         // ===================== VINCULAÇÃO DOS COMPONENTES =====================
 
         // Busca os componentes do layout pelos seus IDs e os associa às variáveis
         editPalavra = findViewById(R.id.editPalavra);
         editTema = findViewById(R.id.editTema);
         btnSalvar = findViewById(R.id.btnSalvar);
+        btnVoltar = findViewById(R.id.btnVoltar);
+
+        // ===================== CONFIGURAÇÃO DO BOTÃO VOLTAR =====================
+        // Define o comportamento quando o botão "Voltar" for clicado
+        btnVoltar.setOnClickListener(v -> {
+            finish(); // Fecha a Activity e volta para a tela anterior
+        });
 
         // ===================== CONFIGURAÇÃO DO BOTÃO SALVAR =====================
 
@@ -83,5 +98,14 @@ public class AddWordActivity extends AppCompatActivity {
                 editTema.setText("");
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Para a música ao destruir a Activity
+        if (audioManager != null) {
+            audioManager.pararMusica();
+        }
     }
 }

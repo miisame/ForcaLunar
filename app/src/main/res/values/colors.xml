@@ -16,4 +16,28 @@
     <color name="moon_silver_bright">#E8EDF5</color>
     <color name="moon_silver_dim">#8A94A8</color>
     <color name="moon_white_translucent">#33FFFFFF</color>
+
+    <!-- Cores para bordas e efeitos (translúcidos) -->
+    <color name="moon_border_light">#33FFFFFF</color>    <!-- 20% branco -->
+    <color name="moon_border_medium">#50FFFFFF</color>   <!-- 31% branco -->
+    <color name="moon_border_strong">#80FFFFFF</color>   <!-- 50% branco -->
+    <color name="moon_border_dark">#30FFFFFF</color>     <!-- 19% branco -->
+
+    <!-- Cores para efeitos de pressão -->
+    <color name="moon_pressed_light">#30FFFFFF</color>   <!-- 19% branco -->
+    <color name="moon_pressed_strong">#70FFFFFF</color>  <!-- 44% branco -->
+
+    <!-- Cores para gradientes do teclado -->
+    <color name="moon_keyboard_top">#25FFFFFF</color>    <!-- 15% branco -->
+    <color name="moon_keyboard_bottom">#08FFFFFF</color> <!-- 3% branco -->
+
+    <!-- Cores para diálogos -->
+    <color name="moon_dialog_bg">#E61A1E2A</color>       <!-- 90% opaco -->
+    <color name="moon_word_chip_bg">#2A2F42</color>
+
+    <!-- Cores para botões primários -->
+    <color name="moon_btn_primary_start">#FFFFFF</color>
+    <color name="moon_btn_primary_end">#E0E5F0</color>
+    <color name="moon_btn_primary_pressed_start">#B0B8C9</color>
+    <color name="moon_btn_primary_pressed_end">#A0A8B9</color>
 </resources>

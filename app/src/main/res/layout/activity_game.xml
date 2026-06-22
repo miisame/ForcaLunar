@@ -6,129 +6,232 @@
     - Imagem da forca
     - Palavra oculta
     - Teclado virtual (gerado dinamicamente)
-    - Container para fragmentos extras -->
-
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/gameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_lunar"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="12dp"
+    android:background="@drawable/bg_gradient_lunar">
 
-    <!-- CARD PRINCIPAL DO JOGO -->
+    <!-- LINHA SUPERIOR: BOTÃO VOLTAR (ESQUERDA) E BOTÃO TECLADO (DIREITA) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_card_lunar"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
 
-        <!-- LINHA: JOGADOR E TEMPO -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/border_bottom_lunar"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp">
+        <!-- Botão Voltar (canto superior esquerdo) -->
+        <ImageButton
+            android:id="@+id/btnVoltarGame"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_voltar"
+            android:background="@drawable/btn_voltar_lunar"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:contentDescription="Voltar" />
 
-            <!-- Imagem do avatar.-->
-            <ImageView
-                android:id="@+id/imgAvatarGame"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/edittext_lunar"
-                android:padding="4dp"
-                android:contentDescription="Avatar do jogador"
-                android:scaleType="centerInside"
-                app:srcCompat="@android:drawable/ic_menu_camera" />
+        <!-- Espaçamento flexível (empurra o botão da direita) -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <!-- Nome do jogador -->
-            <TextView
-                android:id="@+id/txtNick"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/jogador_label"
-                android:textColor="@color/moon_gold_dim"
-                android:textSize="14sp" />
-
-            <!-- Tempo restante -->
-            <TextView
-                android:id="@+id/txtTempo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tempo_label"
-                android:textColor="@color/moon_gold_dim"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- TÍTULO DO JOGO -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:text="@string/tela_jogo"
-            android:textColor="@color/moon_text_light"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <!-- IMAGEM DA FORCA
-             contentDescription: Descrição acessível para leitores de tela -->
-        <ImageView
-            android:id="@+id/imgForca"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
-            android:contentDescription="@string/content_desc_forca"
-            app:srcCompat="@drawable/forca_0" />
-
-        <!-- PALAVRA OCULTA -->
-        <TextView
-            android:id="@+id/txtPalavraOculta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            android:letterSpacing="0.15"
-            android:text="@string/palavra_oculta_placeholder"
-            android:textColor="@color/moon_text_light"
-            android:textSize="34sp"
-            android:textStyle="bold" />
-
-        <!-- TECLADO VIRTUAL
-             Container para o teclado de letras (A-Z).
-             Os botões são gerados dinamicamente pelo Java
-             no método criarTecladoVirtual() da GameActivity.
-             Organização: 5 colunas, botões com weight igual.
-        -->
-        <LinearLayout
-            android:id="@+id/tecladoContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical" />
+        <!-- Botão Alternar Teclado (canto superior direito) -->
+        <ImageButton
+            android:id="@+id/btnAlternarTeclado"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_teclado"
+            android:background="@drawable/btn_voltar_lunar"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:contentDescription="Alternar teclado" />
 
     </LinearLayout>
 
-    <!-- CONTAINER PARA FRAGMENTO
-
-         Área reservada para o fragmento que exibe informações extras.
-         Atualmente, exibe o ForcaFragment (imagem da forca em destaque).
-         Pode ser usado futuramente para notificações ou sensores.
-    -->
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
+    <!-- CONTEÚDO CENTRALIZADO -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="0dp">
 
+        <!-- CARD PRINCIPAL DO JOGO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_lunar"
+            android:padding="20dp"
+            android:layout_marginBottom="1dp">
+
+            <!-- LINHA: JOGADOR E TEMPO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="3dp"
+                android:paddingBottom="5dp">
+
+                <!-- Nome do jogador -->
+                <TextView
+                    android:id="@+id/txtNick"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/jogador_label"
+                    android:textSize="14sp"
+                    android:textColor="@color/moon_gold_dim" />
+
+                <!-- Pontuação -->
+                <TextView
+                    android:id="@+id/txtPontuacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐ 0 pts"
+                    android:textSize="14sp"
+                    android:textColor="@color/moon_gold"
+                    android:layout_marginEnd="12dp" />
+
+                <!-- Tempo restante -->
+                <TextView
+                    android:id="@+id/txtTempo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tempo_label"
+                    android:textSize="14sp"
+                    android:textColor="@color/moon_gold_dim" />
+
+            </LinearLayout>
+
+            <!-- LINHA DIVISÓRIA (ABAIXO DO NOME E TEMPO) -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/moon_border_light"
+                android:layout_marginBottom="12dp" />
+
+            <!-- TÍTULO DO JOGO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tela_jogo"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/moon_text_light"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- IMAGEM DA FORCA
+                 contentDescription: Descrição acessível para leitores de tela -->
+            <ImageView
+                android:id="@+id/imgForca"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                app:srcCompat="@drawable/forca_0"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:contentDescription="@string/content_desc_forca" />
+
+            <!-- PALAVRA OCULTA -->
+            <TextView
+                android:id="@+id/txtPalavraOculta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/palavra_oculta_placeholder"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:textColor="@color/moon_text_light"
+                android:letterSpacing="0.15"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center" />
+
+            <!-- ============================================================
+                 TECLADO NATIVO (visível apenas quando ativado)
+                 ============================================================ -->
+            <LinearLayout
+                android:id="@+id/layoutTecladoNativo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="12dp">
+
+                <!-- Título "Letras tentadas" -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Letras tentadas: "
+                    android:textSize="14sp"
+                    android:textColor="@color/moon_gold_dim"
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="center" />
+
+                <!-- Letras tentadas (exibidas lado a lado) -->
+                <TextView
+                    android:id="@+id/txtLetrasTentadas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="18sp"
+                    android:textColor="@color/moon_text_light"
+                    android:gravity="center"
+                    android:letterSpacing="0.1"
+                    android:background="@drawable/bg_word_dialog"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- CAMPO PARA TECLADO NATIVO (INVISÍVEL POR PADRÃO) -->
+                <EditText
+                    android:id="@+id/editTecladoNativo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite uma letra..."
+                    android:textColor="@color/moon_text_light"
+                    android:textColorHint="@color/moon_gold_dim"
+                    android:background="@drawable/edittext_lunar"
+                    android:padding="12dp"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true" />
+
+            </LinearLayout>
+
+
+
+            <!-- TECLADO VIRTUAL
+                 Container para o teclado de letras (A-Z).
+                 Os botões são gerados dinamicamente pelo Java
+                 no método criarTecladoVirtual() da GameActivity.
+                 Organização: 5 colunas, botões com weight igual.
+            -->
+            <LinearLayout
+                android:id="@+id/tecladoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        <!-- CONTAINER PARA FRAGMENTO
+
+             Área reservada para o fragmento que exibe informações extras.
+             Atualmente, exibe o ForcaFragment (imagem da forca em destaque).
+             Pode ser usado futuramente para notificações ou sensores.
+        -->
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 </LinearLayout>
