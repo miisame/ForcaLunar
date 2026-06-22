@@ -83,11 +83,11 @@ public class SensorsManager implements SensorEventListener {
 
         if (sensorLuz != null) {
             if (valorLuz < 20) {
-                palavraLuz = "Sombrio";
+                palavraLuz = "no breu de uma tumba egípcia";
             } else if (valorLuz <= 150) {
-                palavraLuz = "Iluminado";
+                palavraLuz = "à meia-luz de um luar conspiratório";
             } else {
-                palavraLuz = "Radiante";
+                palavraLuz = "sob um sol de rachar a máscara";
             }
         }
 
@@ -95,15 +95,15 @@ public class SensorsManager implements SensorEventListener {
             float desvioDaGravidade = Math.abs(magnitudeAcelerometro - 9.81f);
 
             if (desvioDaGravidade < 0.5f) {
-                palavraMovimento = "Estável";
+                palavraMovimento = "estático feito uma estátua de pedra";
             } else if (desvioDaGravidade <= 4.0f) {
-                palavraMovimento = "Movimentado";
+                palavraMovimento = "com tremedeira de pura ansiedade";
             } else {
-                palavraMovimento = "Agitado";
+                palavraMovimento = "lutando contra um chacal invisível";
             }
         }
 
-        String mensagemFinal = "Ambiente " + palavraLuz + " e dispositivo " + palavraMovimento + "!";
+        String mensagemFinal = palavraLuz + " " + palavraMovimento + "!";
         Toast.makeText(context, mensagemFinal, Toast.LENGTH_LONG).show();
     }
 }
