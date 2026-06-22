@@ -33,6 +33,8 @@ public class GameActivity extends AppCompatActivity {
     private StringBuilder palavraOculta;        // Palavra com _ para letras não reveladas
     private int erros = 0;                      // Número de erros (max 6)
     private ArrayList<Character> letrasTentadas = new ArrayList<>(); // Letras já usadas
+    private int pontuacao = 0;
+    private int letrasAcertadas = 0;            // Conta letras acertadas na partida atual
 
     // ===================== COMPONENTES DA INTERFACE =====================
     private TextView txtPalavraOculta;          // Exibe a palavra com _
@@ -40,11 +42,16 @@ public class GameActivity extends AppCompatActivity {
     private TextView txtTempo;                  // Exibe o tempo restante
     private ArrayList<Button> botoesTeclado = new ArrayList<>(); // Lista de botões do teclado
     private ImageButton btnVoltarGame;          // Botão para voltar à tela inicial
+    private TextView txtPontuacao;               // TextView para exibir a pontuação
 
     // ===================== CONTROLE DE TEMPO =====================
     private int tempoSegundos = 180;            // 3 minutos (180 segundos)
     private Handler timerHandler = new Handler(); // Gerencia o timer
     private Runnable timerRunnable;             // Ação executada a cada segundo
+
+    // ===================== CONSTANTES DE PONTUAÇÃO =====================
+    private static final int PONTOS_POR_LETRA = 100;      // 100 pontos por letra acertada
+    private static final int BONUS_PALAVRA_COMPLETA = 500; // Bônus por palavra completa
 
     // ===================== CICLO DE VIDA DA ACTIVITY =====================
 
@@ -70,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         txtPalavraOculta = findViewById(R.id.txtPalavraOculta);
         imgForca = findViewById(R.id.imgForca);
         btnVoltarGame = findViewById(R.id.btnVoltarGame);
+        txtPontuacao = findViewById(R.id.txtPontuacao);
 
         // Define descrição acessível para a imagem da forca
         imgForca.setContentDescription(getString(R.string.content_desc_forca, 0));
@@ -224,6 +232,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     /**
+     * Atualiza o TextView da pontuação.
+     */
+    private void atualizarPontuacao() {
+        txtPontuacao.setText("⭐ " + pontuacao + " pts");
+    }
+
+    /**
      * Verifica se a letra escolhida está na palavra secreta.
      * Atualiza a palavra oculta, conta erros e verifica fim de jogo.
      * @param letra Letra escolhida pelo jogador
@@ -244,17 +259,29 @@ public class GameActivity extends AppCompatActivity {
                 // Revela a letra na posição correta
                 palavraOculta.setCharAt(i * 2, palavraSecretaOriginal.charAt(i));
                 acertou = true;
+                letrasAcertadas++;              // Conta letra acertada
             }
         }
 
-        // ===== SE ERROU, INCREMENTA O CONTADOR =====
-        if (!acertou) {
+        // ===== CALCULA PONTUAÇÃO =====
+        if (acertou) {
+            // 100 pontos por letra acertada
+            pontuacao += PONTOS_POR_LETRA;
+
+            // Verifica se a palavra foi completada
+            if (palavraOculta.indexOf("_") == -1) {
+                // Bônus por palavra completa
+                pontuacao += BONUS_PALAVRA_COMPLETA;
+            }
+
+        } else {
             erros++;
             atualizarImagemForca();
         }
 
         // Atualiza a exibição da palavra oculta
         txtPalavraOculta.setText(palavraOculta.toString().trim());
+        atualizarPontuacao();                   // Atualiza pontuação na tela
 
         // ===== VERIFICA FIM DE JOGO =====
         // Vitória: não há mais underscores (_) na palavra
