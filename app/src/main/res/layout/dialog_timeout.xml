@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    dialog_timeout.xml - Diálogo de Tempo Esgotado
+    A dialog_timeout.xml - Diálogo de Tempo Esgotado
     Este diálogo é exibido quando o tempo da partida (3 minutos)
     se esgota antes do jogador adivinhar a palavra.
     Mostra a palavra que ele não conseguiu adivinhar e oferece

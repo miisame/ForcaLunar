@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    dialog_defeat.xml - Diálogo de Derrota (Enforcado)
+    A dialog_defeat.xml - Diálogo de Derrota (Enforcado)
     Este diálogo é exibido quando o jogador comete 6 erros
     e é "enforcado". Mostra a palavra que ele não conseguiu
     adivinhar e oferece opções para reiniciar ou sair.

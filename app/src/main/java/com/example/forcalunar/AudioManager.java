@@ -112,13 +112,4 @@ public class AudioManager {
         });
         mediaPlayerEfeito.start();
     }
-
-    /**
-     * Ajusta o volume da música.
-     */
-    public void setVolume(float volume) {
-        if (mediaPlayer != null) {
-            mediaPlayer.setVolume(volume, volume);
-        }
-    }
 }

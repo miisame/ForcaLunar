@@ -4,15 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.UserDictionary;
-import android.view.ViewGroup;
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Activity principal do jogo da forca.
@@ -39,13 +28,6 @@ public class GameActivity extends AppCompatActivity{
     // ===================== SENSORES =====================
     private SensorsManager sensorManager;
     private AudioManager audioManager;      // Gerenciador de áudio
-
-    // ===================== BANCO DE PALAVRAS =====================
-    // Lista inicial de 10 palavras (requisito do projeto)
-    private String[] palavras = {
-            "LUA", "CAVALO", "MARTELO", "ESTRELA", "ROBÔ",
-            "CAVEIRA", "FOGO", "DRAGÃO", "CAVERNA", "LANÇA"
-    };
 
     // ===================== VARIÁVEIS DO JOGO =====================
     private String palavraSecretaOriginal;      // Palavra escolhida para a partida
@@ -62,7 +44,6 @@ public class GameActivity extends AppCompatActivity{
     private ImageView imgForca;                 // Imagem da forca
     private TextView txtTempo;                  // Exibe o tempo restante
     private ArrayList<Button> botoesTeclado = new ArrayList<>(); // Lista de botões do teclado
-    private ImageButton btnVoltarGame;          // Botão para voltar à tela inicial
     private TextView txtPontuacao;              // TextView para exibir a pontuação
     private ImageButton btnAlternarTeclado;     // Botão para alternar entre teclados
     private EditText editTecladoNativo;         // Campo para o teclado nativo
@@ -116,7 +97,8 @@ public class GameActivity extends AppCompatActivity{
         txtPalavraOculta = findViewById(R.id.txtPalavraOculta);
         txtCategoriaPalavra = findViewById(R.id.txtCategoriaDaPalavra);
         imgForca = findViewById(R.id.imgForca);
-        btnVoltarGame = findViewById(R.id.btnVoltarGame);
+        // Botão para voltar à tela inicial
+        ImageButton btnVoltarGame = findViewById(R.id.btnVoltarGame);
         txtPontuacao = findViewById(R.id.txtPontuacao);
         btnAlternarTeclado = findViewById(R.id.btnAlternarTeclado);
         editTecladoNativo = findViewById(R.id.editTecladoNativo);
@@ -228,9 +210,6 @@ public class GameActivity extends AppCompatActivity{
         editTecladoNativo.setFocusableInTouchMode(true);
     }
 
-    /**
-     * Alterna entre teclado virtual (dinâmico) e teclado nativo (do sistema).
-     */
     /**
      * Alterna entre teclado virtual (dinâmico) e teclado nativo (do sistema).
      */

@@ -50,4 +50,8 @@
     <string name="ic_tempo_esgotado">⏰</string>
     <string name="ic_vitoria">🏆</string>
     <string name="escolher_avatar">Escolha seu Avatar</string>
+    <string name="marc_spector">Marc Spector</string>
+    <string name="steven_grant">Steven Grant</string>
+    <string name="jake_lockley">Jake Lockley</string>
+    <string name="konshu">Konshu</string>
 </resources>

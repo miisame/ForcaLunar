@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-import androidx.core.database.sqlite.SQLiteDatabaseKt;
-
 public class WordsDatabase extends SQLiteOpenHelper
 {
     private static final String DATABASE_NAME = "PalavrasForcaLunarApp.db";
@@ -77,21 +74,19 @@ public class WordsDatabase extends SQLiteOpenHelper
         // O segundo parâmetro substitui o "?" na query de forma segura
         Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                // Pegamos os índices das duas colunas
-                int indicePalavra = cursor.getColumnIndexOrThrow(COLUMN_PALAVRA);
-                int indiceCategoria = cursor.getColumnIndexOrThrow(COLUMN_CATEGORIA);
+        if (cursor.moveToFirst()) {
+            // Pegamos os índices das duas colunas
+            int indicePalavra = cursor.getColumnIndexOrThrow(COLUMN_PALAVRA);
+            int indiceCategoria = cursor.getColumnIndexOrThrow(COLUMN_CATEGORIA);
 
-                // Extraímos os textos
-                String palavra = cursor.getString(indicePalavra);
-                String categoria = cursor.getString(indiceCategoria);
+            // Extraímos os textos
+            String palavra = cursor.getString(indicePalavra);
+            String categoria = cursor.getString(indiceCategoria);
 
-                // Guardamos ambos no array de retorno
-                resultado = new String[]{palavra, categoria};
-            }
-            cursor.close();
+            // Guardamos ambos no array de retorno
+            resultado = new String[]{palavra, categoria};
         }
+        cursor.close();
         db.close();
 
         return resultado;

@@ -204,6 +204,7 @@
                     android:id="@+id/editTecladoNativo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints=""
                     android:hint="@string/hint_letra_forca"
                     android:textColor="@color/moon_text_light"
                     android:textColorHint="@color/moon_gold_dim"

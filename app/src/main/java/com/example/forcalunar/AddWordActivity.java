@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Activity responsável pelo cadastro de novas palavras no jogo.
- * Permite que o usuário insira uma palavra e seu respectivo tema/categoria.
+ * Permite que o usuário insira uma palavra e o seu respectivo tema/categoria.
  */
 
 public class AddWordActivity extends AppCompatActivity {
@@ -20,8 +20,6 @@ public class AddWordActivity extends AppCompatActivity {
     private WordsDatabase wordsDatabase;
     private EditText editPalavra; // Campo de texto para digitar a palavra
     private EditText editTema; // Campo de texto para digitar o tema da palavra
-    private Button btnSalvar; // Botão que salva a palavra cadastrada
-    private ImageButton btnVoltar; // Botão para voltar à tela inicial
 
     // ===================== CICLO DE VIDA DA ACTIVITY =====================
 
@@ -50,8 +48,10 @@ public class AddWordActivity extends AppCompatActivity {
         // Busca os componentes do layout pelos seus IDs e os associa às variáveis
         editPalavra = findViewById(R.id.editPalavra);
         editTema = findViewById(R.id.editTema);
-        btnSalvar = findViewById(R.id.btnSalvar);
-        btnVoltar = findViewById(R.id.btnVoltar);
+        // Botão que salva a palavra cadastrada
+        Button btnSalvar = findViewById(R.id.btnSalvar);
+        // Botão para voltar à tela inicial
+        ImageButton btnVoltar = findViewById(R.id.btnVoltar);
 
         // ===================== CONFIGURAÇÃO DO BOTÃO VOLTAR =====================
         // Define o comportamento quando o botão "Voltar" for clicado

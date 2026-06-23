@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    dialog_victory.xml - Diálogo de Vitória
+    A dialog_victory.xml - Diálogo de Vitória
     Este diálogo é exibido quando o jogador acerta todas as letras
     da palavra secreta. Mostra a palavra que ele conseguiu adivinhar
     e oferece opções para reiniciar ou sair
